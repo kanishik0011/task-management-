@@ -12,7 +12,7 @@ Swagger: _add deployed `/docs` URL_
 
 - Frontend: Next.js App Router, React, TypeScript, Tailwind CSS, React Hook Form, Zod, TanStack Query, Lucide icons
 - Backend: NestJS, TypeScript, REST, class-validator, class-transformer, Swagger/OpenAPI
-- Database: PostgreSQL with Prisma ORM
+- Database: SQLite with Prisma ORM for local/demo simplicity
 
 ## Features
 
@@ -81,7 +81,7 @@ npm install
 cp .env.example apps/api/.env
 cp .env.example apps/web/.env.local
 npm run prisma:generate -w apps/api
-npm run prisma:migrate -w apps/api
+npm run db:setup -w apps/api
 npm run dev
 ```
 
@@ -95,7 +95,7 @@ Swagger runs on `http://localhost:4000/docs`.
 
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:4000
-DATABASE_URL="postgresql://..."
+DATABASE_URL="file:./dev.db"
 JWT_SECRET="replace-me"
 FRONTEND_URL=http://localhost:3000
 PORT=4000
@@ -145,19 +145,20 @@ Recommended deployment:
 
 - Frontend: Vercel
 - Backend: Render, Railway, Fly.io, or a similar Node host
-- Database: Neon, Supabase Postgres, or Railway Postgres
+- Database: SQLite for a simple demo host with persistent disk, or PostgreSQL if the deployment target provides managed Postgres
 
 Production checklist:
 
 - Set `NEXT_PUBLIC_API_URL` to the deployed API URL.
 - Set `FRONTEND_URL` to the deployed frontend URL.
-- Run `npm run prisma:deploy -w apps/api`.
+- Run `npm run prisma:generate -w apps/api` and `npm run db:setup -w apps/api` for SQLite demo deployment, or create migrations if switching to PostgreSQL.
 - Test guest login, task CRUD, refresh persistence, theme persistence, Swagger, and CORS from an incognito browser.
 
 ## Trade-offs
 
 - Demo tasks are seeded for each new guest so reviewers immediately see a populated board.
 - A simple JWT guest flow was chosen over registration to match the assignment scope.
+- SQLite was chosen for this completed fresher-assessment build so reviewers can run the full stack locally without provisioning a database.
 - Exact Figma token fidelity is pending direct design inspection.
 
 ## Future Improvements
@@ -170,3 +171,7 @@ Production checklist:
 ## Part 2 Product Understanding
 
 See `docs/part-2-product-understanding.md`.
+
+## Assessment Checklist
+
+See `docs/assessment-checklist.md`.

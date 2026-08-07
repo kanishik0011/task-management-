@@ -4,35 +4,35 @@
 
 The Take Data workflow appears to help a clinician, therapist, educator, or support staff member record measurable progress for a client/student/case during a session. The expected product outcome is structured data that can later be reviewed for progress tracking, reporting, and care planning.
 
-> Screenshot: add `docs/screenshots/take-data-entry-point.png`
+Observed screenshot: Caseload table with a highlighted `Take Data` action in the Actions column.
 
 ## 2. Entry Point
 
-The workflow begins from the Caseload tab, where the user looks for the client/student/case that needs data collection.
+The workflow begins from the Caseload tab. The supplied screenshot shows a left navigation sidebar with `Caseload` selected, a student table, search/filter controls, and a `Take Data` button in each student's Actions column.
 
-What the user is doing: locating the relevant caseload item and choosing the Take Data action.
+What the user is doing: finding the correct student/client row, checking enough identifying context, and clicking `Take Data`.
 
-What the system appears to do: routes the user from caseload management into a data capture flow scoped to the selected person/case.
+What the system appears to do: starts a data-capture workflow scoped to the selected student/client.
 
 Expected outcome: the user lands in a context-aware Take Data screen without needing to re-select the same case.
 
-UX friction to validate with screenshots: if the Take Data action is visually similar to lower-priority actions, users may need extra scanning time.
+UX friction observed: the action is repeated on every row, but the row is dense. Users must be careful to click the correct `Take Data` button, especially on smaller screens or when rows look similar.
 
 ## 3. Selecting a Client, Student, or Case
 
-> Screenshot: add `docs/screenshots/take-data-client-selection.png`
+The selected student/client should carry forward from the Caseload row. In the screenshot, rows include name, last name, IEP due date, eval due date, collaborators, service time, and school.
 
-What the user is doing: confirming or selecting the person/case for the session.
+What the user is doing: using the row context to select the correct person before entering the workflow.
 
-What the system appears to do: establishes the scope for available goals, targets, and existing data.
+What the system appears to do: establishes the selected student/client as the owner of the data being recorded.
 
 Expected outcome: every subsequent field and data point should clearly belong to the selected person/case.
 
-UX friction to validate with screenshots: the active selection should remain visible throughout the flow so users do not worry about recording data against the wrong case.
+UX friction: if the Take Data screen does not keep the selected student/client visible, users may worry that they are recording data for the wrong row.
 
 ## 4. Selecting Data, Goal, or Session
 
-> Screenshot: add `docs/screenshots/take-data-goal-selection.png`
+This step was not visible in the supplied screenshot, but it is a likely next step after choosing `Take Data`.
 
 What the user is doing: choosing the goal, target, program, or session area where data will be captured.
 
@@ -40,11 +40,11 @@ What the system appears to do: filters the available recording controls based on
 
 Expected outcome: the user sees only relevant data inputs and can move quickly into recording.
 
-UX friction to validate with screenshots: terminology should be consistent between Caseload, goal setup, and Take Data. If the same object is called by different names, new users may hesitate.
+UX friction to validate during manual walkthrough: terminology should be consistent between Caseload, goal setup, and Take Data. If the same object is called by different names, new users may hesitate.
 
 ## 5. Recording Data
 
-> Screenshot: add `docs/screenshots/take-data-recording.png`
+This screen was not visible in the supplied screenshot and should be captured during a manual walkthrough.
 
 What the user is doing: entering observations, counts, ratings, trial results, notes, or completion states.
 
@@ -56,7 +56,7 @@ UX friction to validate with screenshots: the save state should be unmistakable.
 
 ## 6. Saving or Submitting
 
-> Screenshot: add `docs/screenshots/take-data-save-submit.png`
+This screen was not visible in the supplied screenshot and should be captured during a manual walkthrough.
 
 What the user is doing: committing the captured data at the end of the session or after a set of observations.
 
@@ -68,7 +68,7 @@ UX friction to validate with screenshots: failed saves need a recoverable path t
 
 ## 7. Reviewing Captured Data
 
-> Screenshot: add `docs/screenshots/take-data-review.png`
+This screen was not visible in the supplied screenshot and should be captured during a manual walkthrough.
 
 What the user is doing: checking that the saved values were captured correctly.
 
@@ -90,11 +90,11 @@ Suggested improvement: show a persistent saved/unsaved indicator with a last-sav
 
 ### Improvement 2
 
-Problem: active client/case context may become easy to miss once the user is deep in the flow.
+Problem: active student/client context may become easy to miss once the user is deep in the flow.
 
 Why it matters: recording data against the wrong person is a serious workflow error.
 
-Suggested improvement: keep the selected client/case visible in the page header or sticky context bar throughout Take Data.
+Suggested improvement: keep the selected student/client visible in the page header or sticky context bar throughout Take Data.
 
 ### Improvement 3
 
@@ -103,6 +103,14 @@ Problem: repeated navigation between caseload, goals, and recording can slow dow
 Why it matters: Take Data is likely used during time-sensitive sessions.
 
 Suggested improvement: preserve the last selected goal/session for a case and offer a direct "continue previous session" path when appropriate.
+
+### Improvement 4
+
+Problem: the Caseload table is information-dense, and the `Take Data` action appears repeatedly in the same column.
+
+Why it matters: a user may accidentally start data collection for the wrong student/client if rows are visually similar.
+
+Suggested improvement: after clicking `Take Data`, show a clear confirmation context on the next screen, such as the selected name and school/service details in a sticky header.
 
 ## Functional Improvements
 
@@ -116,4 +124,4 @@ Suggested improvement: preserve the last selected goal/session for a case and of
 
 The Take Data workflow should optimize for speed, confidence, and correctness. The most important product qualities are clear context, low-friction recording, reliable save feedback, and easy recovery when something goes wrong.
 
-Note: this document is structured for screenshot-backed analysis. The current coding environment could not inspect the AbleSpace workflow directly, so screenshots and observations should be finalized after manual product walkthrough.
+Note: this document uses the supplied Caseload screenshot for the observed entry point. Screens after the `Take Data` click should be finalized with real screenshots from a manual product walkthrough.

@@ -9,8 +9,10 @@
     "lint": "eslint \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
+    "db:setup": "node scripts/setup-sqlite.cjs",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:push": "prisma db push",
     "prisma:deploy": "prisma migrate deploy"
   },
   "dependencies": {
