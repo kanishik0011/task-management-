@@ -128,6 +128,7 @@ export function TaskDashboard() {
               key={group.status}
               status={group.status}
               tasks={group.tasks}
+              isUpdating={updateMutation.isPending}
               updatingTaskId={updateMutation.variables?.id}
               onDelete={setDeletingTask}
               onEdit={setEditingTask}
@@ -205,6 +206,7 @@ export function TaskDashboard() {
 function TaskColumn({
   status,
   tasks,
+  isUpdating,
   updatingTaskId,
   onEdit,
   onDelete,
@@ -212,6 +214,7 @@ function TaskColumn({
 }: {
   status: TaskStatus;
   tasks: Task[];
+  isUpdating: boolean;
   updatingTaskId?: string;
   onEdit: (task: Task) => void;
   onDelete: (task: Task) => void;
@@ -232,7 +235,7 @@ function TaskColumn({
           tasks.map((task) => (
             <TaskCard
               key={task.id}
-              isUpdating={updatingTaskId === task.id}
+              isUpdating={isUpdating && updatingTaskId === task.id}
               task={task}
               onDelete={onDelete}
               onEdit={onEdit}
