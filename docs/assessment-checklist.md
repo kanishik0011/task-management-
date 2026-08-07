@@ -37,6 +37,7 @@
 
 - [x] Product workflow document created
 - [x] Entry point described from supplied Caseload screenshot
+- [x] Entry point screenshot added to `docs/screenshots/take-data-entry-point.png`
 - [x] UX/UI observations included
 - [x] Functional improvements included
 - [ ] Add remaining screenshots from manual Take Data walkthrough

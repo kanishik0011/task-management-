@@ -11,5 +11,6 @@ coverage
 apps/api/prisma/*.db
 apps/api/prisma/*.db-journal
 docs/screenshots/*.png
+!docs/screenshots/take-data-entry-point.png
 docs/screenshots/*.jpg
 docs/screenshots/*.jpeg

@@ -4,11 +4,13 @@
 
 The Take Data workflow appears to help a clinician, therapist, educator, or support staff member record measurable progress for a client/student/case during a session. The expected product outcome is structured data that can later be reviewed for progress tracking, reporting, and care planning.
 
+![Caseload table with Take Data action highlighted](screenshots/take-data-entry-point.png)
+
 Observed screenshot: Caseload table with a highlighted `Take Data` action in the Actions column.
 
 ## 2. Entry Point
 
-The workflow begins from the Caseload tab. The supplied screenshot shows a left navigation sidebar with `Caseload` selected, a student table, search/filter controls, and a `Take Data` button in each student's Actions column.
+The workflow begins from the Caseload tab. The screenshot above shows a left navigation sidebar with `Caseload` selected, a student table, search/filter controls, and a `Take Data` button in each student's Actions column.
 
 What the user is doing: finding the correct student/client row, checking enough identifying context, and clicking `Take Data`.
 
