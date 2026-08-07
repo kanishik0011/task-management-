@@ -49,11 +49,13 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     throw new Error(message);
   }
 
-  if (response.status === 204) {
+  const text = await response.text();
+
+  if (!text) {
     return undefined as T;
   }
 
-  return response.json() as Promise<T>;
+  return JSON.parse(text) as T;
 }
 
 export const authApi = {
