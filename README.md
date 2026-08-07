@@ -175,3 +175,7 @@ See `docs/part-2-product-understanding.md`.
 ## Assessment Checklist
 
 See `docs/assessment-checklist.md`.
+
+## Submission Guide
+
+See `docs/submission-guide.md`.
