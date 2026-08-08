@@ -8,6 +8,18 @@ Backend API: _add deployed URL_
 
 Swagger: _add deployed `/docs` URL_
 
+Repository: https://github.com/kanishik0011/task-management-
+
+## Screenshots
+
+### Task Dashboard
+
+![Task dashboard showing guest-scoped tasks across status columns](docs/screenshots/task-dashboard.png)
+
+### Part 2 - AbleSpace Take Data Entry Point
+
+![AbleSpace Caseload table with Take Data action highlighted](docs/screenshots/take-data-entry-point.png)
+
 ## Tech Stack
 
 - Frontend: Next.js App Router, React, TypeScript, Tailwind CSS, React Hook Form, Zod, TanStack Query, Lucide icons
