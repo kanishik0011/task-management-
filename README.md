@@ -2,9 +2,9 @@
 
 ## Live Demo
 
-Frontend: _add deployed URL_
+Frontend: _add Vercel URL_
 
-Backend API: _add deployed URL_
+Backend API: _add deployed API URL_
 
 Swagger: _add deployed `/docs` URL_
 
@@ -158,6 +158,28 @@ Recommended deployment:
 - Frontend: Vercel
 - Backend: Render, Railway, Fly.io, or a similar Node host
 - Database: SQLite for a simple demo host with persistent disk, or PostgreSQL if the deployment target provides managed Postgres
+
+### Vercel Frontend Setup
+
+When importing the GitHub repo into Vercel, use:
+
+- Framework Preset: `Next.js`
+- Root Directory: `apps/web`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `.next`
+
+Set this Vercel environment variable:
+
+```bash
+NEXT_PUBLIC_API_URL=https://your-deployed-api-url
+```
+
+Do not leave `NEXT_PUBLIC_API_URL` as `localhost` in production.
+
+### Backend Setup
+
+Deploy `apps/api` separately on a Node host. The backend must be live before the Vercel frontend is reviewed.
 
 Production checklist:
 

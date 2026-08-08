@@ -51,6 +51,26 @@ Recommended simple deployment path:
 - Backend: Render, Railway, Fly.io, or another Node host
 - Database: SQLite with persistent disk for a simple demo, or PostgreSQL if your backend host provides managed Postgres
 
+## Vercel Frontend Settings
+
+Use these settings when importing the GitHub repository into Vercel:
+
+```text
+Framework Preset: Next.js
+Root Directory: apps/web
+Install Command: npm install
+Build Command: npm run build
+Output Directory: .next
+```
+
+Add this Vercel environment variable:
+
+```bash
+NEXT_PUBLIC_API_URL=https://your-deployed-api-url
+```
+
+The frontend will build on Vercel without the backend running, but task loading only works after `NEXT_PUBLIC_API_URL` points to the deployed Nest API.
+
 Required production environment variables:
 
 ```bash
