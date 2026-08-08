@@ -71,6 +71,8 @@ NEXT_PUBLIC_API_URL=https://your-deployed-api-url
 
 The frontend will build on Vercel without the backend running, but task loading only works after `NEXT_PUBLIC_API_URL` points to the deployed Nest API.
 
+The frontend has a browser-local demo fallback if the API is unreachable, so the page will remain usable during preview. For the assessment submission, still provide the deployed backend URL because the assignment asks for a working API.
+
 Required production environment variables:
 
 ```bash

@@ -31,6 +31,7 @@ Repository: https://github.com/kanishik0011/task-management-
 - Guest login with isolated task data
 - Task create, read, update, status change, and delete
 - Delete confirmation and friendly async error states
+- Browser demo fallback if the deployed API is temporarily unreachable
 - Persistent theme switching with CSS variables
 - Responsive dashboard for desktop, tablet, and mobile
 - Swagger API docs and health endpoint
@@ -47,6 +48,8 @@ docs      - product understanding deliverables
 ```
 
 The frontend keeps API calls in `src/lib/api.ts` and uses TanStack Query for server state. The backend keeps controllers thin and moves business rules into services. Prisma owns persistence and task records are always scoped by guest id.
+
+If the frontend cannot reach the API, it falls back to a browser-local demo workspace so the Vercel deployment remains reviewable instead of showing a broken fetch screen. The intended full-stack path is still the Nest API, and production submissions should set `NEXT_PUBLIC_API_URL` to the deployed backend.
 
 ## Guest Authentication
 
@@ -193,6 +196,7 @@ Production checklist:
 - Demo tasks are seeded for each new guest so reviewers immediately see a populated board.
 - A simple JWT guest flow was chosen over registration to match the assignment scope.
 - SQLite was chosen for this completed fresher-assessment build so reviewers can run the full stack locally without provisioning a database.
+- The frontend includes a local demo fallback for API outages, but the full-stack submission should still provide a live backend URL.
 - Exact Figma token fidelity is pending direct design inspection.
 
 ## Future Improvements
