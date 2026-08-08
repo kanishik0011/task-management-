@@ -45,7 +45,15 @@ export function TaskDashboard() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, input }: { id: string; input: TaskUpdateInput }) => taskApi.update(id, input),
+    mutationFn: ({
+      id,
+      input,
+      currentTask
+    }: {
+      id: string;
+      input: TaskUpdateInput;
+      currentTask?: Task;
+    }) => taskApi.update(id, input, currentTask),
     onMutate: async ({ id, input }) => {
       await queryClient.cancelQueries({ queryKey: TASKS_QUERY_KEY });
       const previousTasks = queryClient.getQueryData<Task[]>(TASKS_QUERY_KEY);
@@ -69,11 +77,11 @@ export function TaskDashboard() {
         queryClient.setQueryData(TASKS_QUERY_KEY, context.previousTasks);
       }
     },
-    onSuccess: () => {
+    onSuccess: (updatedTask) => {
+      queryClient.setQueryData<Task[]>(TASKS_QUERY_KEY, (currentTasks) =>
+        currentTasks?.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      );
       setEditingTask(null);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: TASKS_QUERY_KEY });
     }
   });
 
@@ -159,9 +167,10 @@ export function TaskDashboard() {
               updatingTaskId={updateMutation.variables?.id}
               onDelete={setDeletingTask}
               onEdit={setEditingTask}
-              onStatusChange={(task, status) =>
-                updateMutation.mutate({ id: task.id, input: { status } })
-              }
+              onStatusChange={(task, status) => {
+                updateMutation.reset();
+                updateMutation.mutate({ id: task.id, input: { status }, currentTask: task });
+              }}
             />
           ))}
         </div>
@@ -198,7 +207,10 @@ export function TaskDashboard() {
             task={editingTask}
             isSubmitting={updateMutation.isPending}
             onCancel={() => setEditingTask(null)}
-            onSubmit={(input) => updateMutation.mutate({ id: editingTask.id, input })}
+            onSubmit={(input) => {
+              updateMutation.reset();
+              updateMutation.mutate({ id: editingTask.id, input, currentTask: editingTask });
+            }}
           />
         ) : null}
       </Dialog>

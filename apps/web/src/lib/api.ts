@@ -207,9 +207,9 @@ export const taskApi = {
       throw error;
     }
   },
-  async update(id: string, input: TaskUpdateInput) {
+  async update(id: string, input: TaskUpdateInput, currentTask?: Task) {
     if (getLocalGuestId()) {
-      return updateLocalTask(id, input);
+      return updateLocalTask(id, input, currentTask);
     }
 
     try {
@@ -219,7 +219,7 @@ export const taskApi = {
       });
     } catch (error) {
       if (isNetworkError(error)) {
-        return updateLocalTask(id, input);
+        return updateLocalTask(id, input, currentTask);
       }
       throw error;
     }
@@ -244,7 +244,7 @@ export const taskApi = {
   }
 };
 
-function updateLocalTask(id: string, input: TaskUpdateInput) {
+function updateLocalTask(id: string, input: TaskUpdateInput, currentTask?: Task) {
   let updatedTask: Task | undefined;
   const tasks = ensureLocalTasks().map((task) => {
     if (task.id !== id) {
@@ -261,8 +261,20 @@ function updateLocalTask(id: string, input: TaskUpdateInput) {
     return updatedTask;
   });
 
+  if (!updatedTask && currentTask) {
+    updatedTask = {
+      ...currentTask,
+      ...input,
+      description: input.description ?? currentTask.description,
+      dueDate: input.dueDate ?? currentTask.dueDate,
+      updatedAt: new Date().toISOString()
+    };
+    saveLocalTasks([updatedTask, ...tasks.filter((task) => task.id !== id)]);
+    return updatedTask;
+  }
+
   if (!updatedTask) {
-    throw new Error('Task was not found in this demo workspace.');
+    throw new Error('Task was not found in this workspace.');
   }
 
   saveLocalTasks(tasks);
