@@ -60,7 +60,7 @@ Framework Preset: Next.js
 Root Directory: apps/web
 Install Command: npm install
 Build Command: npm run build
-Output Directory: .next
+Output Directory: out
 ```
 
 Add this Vercel environment variable:
@@ -72,6 +72,8 @@ NEXT_PUBLIC_API_URL=https://your-deployed-api-url
 The frontend will build on Vercel without the backend running, but task loading only works after `NEXT_PUBLIC_API_URL` points to the deployed Nest API.
 
 The frontend has a browser-local demo fallback if the API is unreachable, so the page will remain usable during preview. For the assessment submission, still provide the deployed backend URL because the assignment asks for a working API.
+
+The frontend is configured as a static export. If Vercel previously showed `FUNCTION_INVOCATION_FAILED`, redeploy from the latest `main` commit so Vercel serves the static `out` directory instead of a crashed serverless function.
 
 Required production environment variables:
 

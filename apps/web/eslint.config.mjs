@@ -6,7 +6,7 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['.next/**', 'node_modules/**', 'coverage/**']
+    ignores: ['.next/**', 'node_modules/**', 'coverage/**', 'out/**']
   },
   {
     files: ['**/*.{ts,tsx}'],

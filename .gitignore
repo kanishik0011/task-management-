@@ -1,5 +1,7 @@
 node_modules
 .next
+out
+apps/web/out
 dist
 coverage
 .env

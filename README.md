@@ -170,7 +170,7 @@ When importing the GitHub repo into Vercel, use:
 - Root Directory: `apps/web`
 - Install Command: `npm install`
 - Build Command: `npm run build`
-- Output Directory: `.next`
+- Output Directory: `out`
 
 Set this Vercel environment variable:
 
@@ -179,6 +179,8 @@ NEXT_PUBLIC_API_URL=https://your-deployed-api-url
 ```
 
 Do not leave `NEXT_PUBLIC_API_URL` as `localhost` in production.
+
+The frontend uses `output: 'export'`, so Vercel serves it as static files instead of a serverless function. This avoids frontend `FUNCTION_INVOCATION_FAILED` crashes and keeps the UI available even while the backend is deployed separately.
 
 ### Backend Setup
 
