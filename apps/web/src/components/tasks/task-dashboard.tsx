@@ -117,6 +117,10 @@ export function TaskDashboard() {
   );
 
   const resetGuest = async () => {
+    createMutation.reset();
+    updateMutation.reset();
+    deleteMutation.reset();
+    guestMutation.reset();
     clearStoredToken();
     await guestMutation.mutateAsync();
   };
@@ -126,6 +130,8 @@ export function TaskDashboard() {
     updateMutation.error?.message ||
     deleteMutation.error?.message ||
     guestMutation.error?.message;
+  const visibleActionError =
+    actionError === 'Failed to fetch' && tasks.length > 0 ? undefined : actionError;
 
   return (
     <AppShell
@@ -145,10 +151,10 @@ export function TaskDashboard() {
         <ErrorState message={tasksQuery.error.message} onRetry={() => tasksQuery.refetch()} />
       ) : null}
 
-      {actionError ? (
+      {visibleActionError ? (
         <div className="mb-5 flex items-start gap-3 rounded-lg border border-[var(--danger)]/40 bg-[var(--surface)] p-4 text-sm text-[var(--danger)]">
           <AlertCircle className="mt-0.5 shrink-0" size={18} />
-          <p>{actionError}</p>
+          <p>{visibleActionError}</p>
         </div>
       ) : null}
 
@@ -192,7 +198,12 @@ export function TaskDashboard() {
         <TaskForm
           isSubmitting={createMutation.isPending}
           onCancel={() => setIsCreateOpen(false)}
-          onSubmit={(input) => createMutation.mutate(input)}
+          onSubmit={(input) => {
+            createMutation.reset();
+            updateMutation.reset();
+            deleteMutation.reset();
+            createMutation.mutate(input);
+          }}
         />
       </Dialog>
 
@@ -232,7 +243,15 @@ export function TaskDashboard() {
             disabled={deleteMutation.isPending || !deletingTask}
             type="button"
             variant="danger"
-            onClick={() => deletingTask && deleteMutation.mutate(deletingTask.id)}
+            onClick={() => {
+              if (!deletingTask) {
+                return;
+              }
+              createMutation.reset();
+              updateMutation.reset();
+              deleteMutation.reset();
+              deleteMutation.mutate(deletingTask.id);
+            }}
           >
             {deleteMutation.isPending ? 'Deleting...' : 'Delete task'}
           </Button>
