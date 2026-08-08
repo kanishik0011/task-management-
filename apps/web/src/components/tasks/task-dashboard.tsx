@@ -12,6 +12,8 @@ import { TaskCard } from './task-card';
 import { TaskForm } from './task-form';
 import { statusLabel } from './status-badge';
 
+const TASKS_QUERY_KEY = ['tasks'] as const;
+
 export function TaskDashboard() {
   const queryClient = useQueryClient();
   const [search, setSearch] = useState('');
@@ -21,11 +23,11 @@ export function TaskDashboard() {
 
   const guestMutation = useMutation({
     mutationFn: authApi.createGuest,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tasks'] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: TASKS_QUERY_KEY })
   });
 
   const tasksQuery = useQuery({
-    queryKey: ['tasks'],
+    queryKey: TASKS_QUERY_KEY,
     queryFn: async () => {
       if (!getStoredToken()) {
         await authApi.createGuest();
@@ -38,15 +40,40 @@ export function TaskDashboard() {
     mutationFn: taskApi.create,
     onSuccess: () => {
       setIsCreateOpen(false);
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: TASKS_QUERY_KEY });
     }
   });
 
   const updateMutation = useMutation({
     mutationFn: ({ id, input }: { id: string; input: TaskUpdateInput }) => taskApi.update(id, input),
+    onMutate: async ({ id, input }) => {
+      await queryClient.cancelQueries({ queryKey: TASKS_QUERY_KEY });
+      const previousTasks = queryClient.getQueryData<Task[]>(TASKS_QUERY_KEY);
+
+      queryClient.setQueryData<Task[]>(TASKS_QUERY_KEY, (currentTasks) =>
+        currentTasks?.map((task) =>
+          task.id === id
+            ? {
+                ...task,
+                ...input,
+                updatedAt: new Date().toISOString()
+              }
+            : task
+        )
+      );
+
+      return { previousTasks };
+    },
+    onError: (_error, _variables, context) => {
+      if (context?.previousTasks) {
+        queryClient.setQueryData(TASKS_QUERY_KEY, context.previousTasks);
+      }
+    },
     onSuccess: () => {
       setEditingTask(null);
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: TASKS_QUERY_KEY });
     }
   });
 
@@ -54,7 +81,7 @@ export function TaskDashboard() {
     mutationFn: taskApi.delete,
     onSuccess: () => {
       setDeletingTask(null);
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: TASKS_QUERY_KEY });
     }
   });
 
