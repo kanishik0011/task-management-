@@ -17,3 +17,5 @@ docs/screenshots/*.png
 !docs/screenshots/take-data-entry-point.png
 docs/screenshots/*.jpg
 docs/screenshots/*.jpeg
+apps/web/AGENTS.md
+apps/web/CLAUDE.md
