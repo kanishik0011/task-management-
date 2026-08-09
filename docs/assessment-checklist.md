@@ -28,8 +28,10 @@
 - [x] Multiple meaningful Git commits
 - [x] Backend tests
 - [x] Frontend form behavior tests
+- [x] Vercel frontend configuration
+- [x] Static frontend export for Vercel
 - [ ] Exact Figma token matching after direct Figma inspection
-- [ ] Public GitHub repository URL
+- [x] Public GitHub repository URL: `https://github.com/kanishik0011/task-management-`
 - [ ] Deployed frontend URL
 - [ ] Deployed backend URL
 
@@ -48,8 +50,26 @@
 - [x] `npm run lint`
 - [x] `npm run test`
 - [x] `npm run build`
+- [x] `npm run vercel-build`
+- [x] `npm audit`
 - [x] Local API health check
 - [x] Local guest login and task fetch check
+
+## Deployment Settings
+
+Use these Vercel settings if deploying the frontend from `apps/web`:
+
+- Root Directory: `apps/web`
+- Install Command: `npm install`
+- Build Command: `npm run vercel-build`
+- Output Directory: `out`
+
+Alternative root-repo deployment is also supported by the root `vercel.json`:
+
+- Root Directory: repository root / empty
+- Install Command: `npm install`
+- Build Command: `npm run vercel-build`
+- Output Directory: `apps/web/out`
 
 ## Local Preview
 
