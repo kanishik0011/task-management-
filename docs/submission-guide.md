@@ -63,6 +63,8 @@ Build Command: npm run vercel-build
 Output Directory: apps/web/out
 ```
 
+If Vercel shows `No Next.js version detected`, fix the Vercel project Root Directory. It must be either the repository root or `apps/web`; it cannot be `apps` or `apps/api`.
+
 Add this Vercel environment variable:
 
 ```bash

@@ -172,6 +172,8 @@ When importing the GitHub repo into Vercel, use the repository root. The root `v
 - Build Command: `npm run vercel-build`
 - Output Directory: `apps/web/out`
 
+If Vercel shows `No Next.js version detected`, the Vercel project is using the wrong Root Directory. Set Root Directory to either the repository root or `apps/web`; do not set it to `apps` or `apps/api`.
+
 Set this Vercel environment variable:
 
 ```bash
