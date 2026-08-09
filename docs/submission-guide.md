@@ -57,10 +57,10 @@ Use these settings when importing the GitHub repository into Vercel:
 
 ```text
 Framework Preset: Next.js
-Root Directory: apps/web
+Root Directory: leave empty / repository root
 Install Command: npm install
-Build Command: npm run build
-Output Directory: out
+Build Command: npm run vercel-build
+Output Directory: apps/web/out
 ```
 
 Add this Vercel environment variable:

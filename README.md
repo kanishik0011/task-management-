@@ -164,13 +164,13 @@ Recommended deployment:
 
 ### Vercel Frontend Setup
 
-When importing the GitHub repo into Vercel, use:
+When importing the GitHub repo into Vercel, use the repository root. The root `vercel.json` already points Vercel to the web app output:
 
 - Framework Preset: `Next.js`
-- Root Directory: `apps/web`
+- Root Directory: leave empty / repository root
 - Install Command: `npm install`
-- Build Command: `npm run build`
-- Output Directory: `out`
+- Build Command: `npm run vercel-build`
+- Output Directory: `apps/web/out`
 
 Set this Vercel environment variable:
 
