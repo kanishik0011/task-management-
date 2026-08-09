@@ -1,0 +1,12 @@
+{
+  "name": "task-management-vercel-apps-root",
+  "private": true,
+  "scripts": {
+    "vercel-build": "cd web && npm install && npm run vercel-build"
+  },
+  "dependencies": {
+    "next": "^16.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}

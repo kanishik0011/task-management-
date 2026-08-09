@@ -19,3 +19,4 @@ docs/screenshots/*.jpg
 docs/screenshots/*.jpeg
 apps/web/AGENTS.md
 apps/web/CLAUDE.md
+apps/web/package-lock.json
