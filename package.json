@@ -17,7 +17,9 @@
     "format": "prettier --write \"apps/**/*.{ts,tsx,css,md,json}\" \"docs/**/*.md\" README.md"
   },
   "overrides": {
-    "vite": "6.4.3"
+    "vite": "6.4.3",
+    "effect": "^3.21.0",
+    "js-yaml": "5.2.3"
   },
   "dependencies": {
     "next": "^16.3.0",
