@@ -65,6 +65,8 @@ Output Directory: apps/web/out
 
 If Vercel shows `No Next.js version detected`, fix the Vercel project Root Directory. It must be either the repository root or `apps/web`; it cannot be `apps` or `apps/api`.
 
+After changing the Root Directory, redeploy the latest `main` commit with the Vercel build cache cleared so Vercel does not reuse an older failed deployment.
+
 Add this Vercel environment variable:
 
 ```bash
